@@ -1,0 +1,36 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+crash.log
+override.tf
+override.tf.json
+
+# Cloud credentials
+clouds.yaml
+openrc.sh
+*.pem
+*.key
+*.crt
+
+# Environment secrets
+.env
+.env.*
+!.env.example
+
+# Kubernetes credentials
+kubeconfig
+.kube/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
