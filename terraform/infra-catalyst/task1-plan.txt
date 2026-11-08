@@ -1,0 +1,257 @@
+data.openstack_networking_network_v2.external: Reading...
+data.openstack_compute_flavor_v2.selected: Reading...
+data.openstack_images_image_v2.ubuntu: Reading...
+data.openstack_networking_network_v2.external: Read complete after 1s [id=849ab1e9-7ac5-4618-8801-e6176fbbcf30]
+data.openstack_compute_flavor_v2.selected: Read complete after 1s [id=0c7dc485-e7cc-420d-b118-021bbafa76d7]
+data.openstack_images_image_v2.ubuntu: Read complete after 1s [id=9bc72fa3-64d5-416c-baa8-eb1cb18be6f7]
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # openstack_blockstorage_volume_v3.data will be created
+  + resource "openstack_blockstorage_volume_v3" "data" {
+      + attachment        = (known after apply)
+      + availability_zone = (known after apply)
+      + description       = "Dedicated Kubernetes data storage"
+      + id                = (known after apply)
+      + metadata          = (known after apply)
+      + name              = "daniel-data"
+      + region            = (known after apply)
+      + size              = 32
+      + volume_type       = (known after apply)
+    }
+
+  # openstack_compute_instance_v2.main will be created
+  + resource "openstack_compute_instance_v2" "main" {
+      + access_ip_v4        = (known after apply)
+      + access_ip_v6        = (known after apply)
+      + all_metadata        = (known after apply)
+      + all_tags            = (known after apply)
+      + availability_zone   = (known after apply)
+      + created             = (known after apply)
+      + flavor_id           = "0c7dc485-e7cc-420d-b118-021bbafa76d7"
+      + flavor_name         = (known after apply)
+      + force_delete        = false
+      + id                  = (known after apply)
+      + image_id            = (known after apply)
+      + image_name          = (known after apply)
+      + key_pair            = "daniel-key"
+      + name                = "daniel-k8s"
+      + power_state         = "active"
+      + region              = (known after apply)
+      + security_groups     = [
+          + "daniel-security",
+        ]
+      + stop_before_destroy = false
+      + updated             = (known after apply)
+      + user_data           = "7244f5336ad89d61fb17919ff58a960858b4de7a"
+
+      + block_device {
+          + boot_index            = 0
+          + delete_on_termination = true
+          + destination_type      = "volume"
+          + multiattach           = false
+          + source_type           = "image"
+          + uuid                  = "9bc72fa3-64d5-416c-baa8-eb1cb18be6f7"
+          + volume_size           = 40
+        }
+
+      + network {
+          + access_network = false
+          + fixed_ip_v4    = (known after apply)
+          + fixed_ip_v6    = (known after apply)
+          + mac            = (known after apply)
+          + name           = (known after apply)
+          + port           = (known after apply)
+          + uuid           = (known after apply)
+        }
+    }
+
+  # openstack_compute_keypair_v2.main will be created
+  + resource "openstack_compute_keypair_v2" "main" {
+      + fingerprint = (known after apply)
+      + id          = (known after apply)
+      + name        = "daniel-key"
+      + private_key = (sensitive value)
+      + public_key  = <<-EOT
+            ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC/tq9mV2w0hyU4tesEBpsNGqJ4IJtsPV/QOJVSAW9Ml ID72001-Assignment3
+        EOT
+      + region      = (known after apply)
+      + user_id     = (known after apply)
+    }
+
+  # openstack_compute_volume_attach_v2.data will be created
+  + resource "openstack_compute_volume_attach_v2" "data" {
+      + device      = (known after apply)
+      + id          = (known after apply)
+      + instance_id = (known after apply)
+      + region      = (known after apply)
+      + volume_id   = (known after apply)
+    }
+
+  # openstack_networking_floatingip_associate_v2.main will be created
+  + resource "openstack_networking_floatingip_associate_v2" "main" {
+      + fixed_ip    = (known after apply)
+      + floating_ip = (known after apply)
+      + id          = (known after apply)
+      + port_id     = (known after apply)
+      + region      = (known after apply)
+    }
+
+  # openstack_networking_floatingip_v2.main will be created
+  + resource "openstack_networking_floatingip_v2" "main" {
+      + address    = (known after apply)
+      + all_tags   = (known after apply)
+      + dns_domain = (known after apply)
+      + dns_name   = (known after apply)
+      + fixed_ip   = (known after apply)
+      + id         = (known after apply)
+      + pool       = "public-net"
+      + port_id    = (known after apply)
+      + region     = (known after apply)
+      + subnet_id  = (known after apply)
+      + tenant_id  = (known after apply)
+    }
+
+  # openstack_networking_network_v2.private will be created
+  + resource "openstack_networking_network_v2" "private" {
+      + admin_state_up          = true
+      + all_tags                = (known after apply)
+      + availability_zone_hints = (known after apply)
+      + dns_domain              = (known after apply)
+      + external                = (known after apply)
+      + id                      = (known after apply)
+      + mtu                     = (known after apply)
+      + name                    = "daniel-net"
+      + port_security_enabled   = (known after apply)
+      + qos_policy_id           = (known after apply)
+      + region                  = (known after apply)
+      + shared                  = (known after apply)
+      + tenant_id               = (known after apply)
+      + transparent_vlan        = (known after apply)
+
+      + segments (known after apply)
+    }
+
+  # openstack_networking_router_interface_v2.private will be created
+  + resource "openstack_networking_router_interface_v2" "private" {
+      + force_destroy = false
+      + id            = (known after apply)
+      + port_id       = (known after apply)
+      + region        = (known after apply)
+      + router_id     = (known after apply)
+      + subnet_id     = (known after apply)
+    }
+
+  # openstack_networking_router_v2.main will be created
+  + resource "openstack_networking_router_v2" "main" {
+      + admin_state_up          = true
+      + all_tags                = (known after apply)
+      + availability_zone_hints = (known after apply)
+      + distributed             = (known after apply)
+      + enable_snat             = (known after apply)
+      + external_network_id     = "849ab1e9-7ac5-4618-8801-e6176fbbcf30"
+      + id                      = (known after apply)
+      + name                    = "daniel-router"
+      + region                  = (known after apply)
+      + tenant_id               = (known after apply)
+
+      + external_fixed_ip (known after apply)
+    }
+
+  # openstack_networking_secgroup_rule_v2.http will be created
+  + resource "openstack_networking_secgroup_rule_v2" "http" {
+      + direction         = "ingress"
+      + ethertype         = "IPv4"
+      + id                = (known after apply)
+      + port_range_max    = 80
+      + port_range_min    = 80
+      + protocol          = "tcp"
+      + region            = (known after apply)
+      + remote_group_id   = (known after apply)
+      + remote_ip_prefix  = "0.0.0.0/0"
+      + security_group_id = (known after apply)
+      + tenant_id         = (known after apply)
+    }
+
+  # openstack_networking_secgroup_rule_v2.https will be created
+  + resource "openstack_networking_secgroup_rule_v2" "https" {
+      + direction         = "ingress"
+      + ethertype         = "IPv4"
+      + id                = (known after apply)
+      + port_range_max    = 443
+      + port_range_min    = 443
+      + protocol          = "tcp"
+      + region            = (known after apply)
+      + remote_group_id   = (known after apply)
+      + remote_ip_prefix  = "0.0.0.0/0"
+      + security_group_id = (known after apply)
+      + tenant_id         = (known after apply)
+    }
+
+  # openstack_networking_secgroup_rule_v2.ssh will be created
+  + resource "openstack_networking_secgroup_rule_v2" "ssh" {
+      + direction         = "ingress"
+      + ethertype         = "IPv4"
+      + id                = (known after apply)
+      + port_range_max    = 22
+      + port_range_min    = 22
+      + protocol          = "tcp"
+      + region            = (known after apply)
+      + remote_group_id   = (known after apply)
+      + remote_ip_prefix  = "121.74.184.8/32"
+      + security_group_id = (known after apply)
+      + tenant_id         = (known after apply)
+    }
+
+  # openstack_networking_secgroup_v2.web will be created
+  + resource "openstack_networking_secgroup_v2" "web" {
+      + all_tags    = (known after apply)
+      + description = "Firewall for the Kubernetes host"
+      + id          = (known after apply)
+      + name        = "daniel-security"
+      + region      = (known after apply)
+      + stateful    = (known after apply)
+      + tenant_id   = (known after apply)
+    }
+
+  # openstack_networking_subnet_v2.private will be created
+  + resource "openstack_networking_subnet_v2" "private" {
+      + all_tags          = (known after apply)
+      + cidr              = "10.72.1.0/24"
+      + dns_nameservers   = [
+          + "202.78.240.213",
+          + "202.78.240.214",
+          + "202.78.240.215",
+        ]
+      + enable_dhcp       = true
+      + gateway_ip        = (known after apply)
+      + id                = (known after apply)
+      + ip_version        = 4
+      + ipv6_address_mode = (known after apply)
+      + ipv6_ra_mode      = (known after apply)
+      + name              = "daniel-subnet"
+      + network_id        = (known after apply)
+      + no_gateway        = false
+      + region            = (known after apply)
+      + service_types     = (known after apply)
+      + tenant_id         = (known after apply)
+
+      + allocation_pool (known after apply)
+    }
+
+Plan: 14 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + admin_user  = "ubuntu"
+  + public_ip   = (known after apply)
+  + shop_host   = (known after apply)
+  + ssh_command = (known after apply)
+
+─────────────────────────────────────────────────────────────────────────────
+
+Note: You didn't use the -out option to save this plan, so Terraform can't
+guarantee to take exactly these actions if you run "terraform apply" now.
